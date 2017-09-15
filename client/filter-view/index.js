@@ -130,9 +130,6 @@ View.prototype.saveProfile = function () {
 
 //ensure bike safe, slope and time are a percentage
 function getPercentage(safe, slope, time){
-  if (safe < 0) safe = 0
-  if (slope < 0) slope = 0
-  if (time < 0) time = 0
   var total = safe + slope + time
   if (total) { //pas de division par 0
     safe = Math.floor(100 * safe / total)

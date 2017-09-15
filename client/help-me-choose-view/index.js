@@ -55,7 +55,7 @@ var filters = {
 
 var Modal = module.exports = modal({
   closable: true,
-  width: '868px',
+  width: '1000px',
   template: require('./template.html')
 }, function (view, routes) {
   view.primaryFilter = view.find('#primary-filter')
@@ -154,7 +154,7 @@ Modal.prototype.renderRoute = function (data) {
   data.emissionsNOx = data.emissionsNOx ? parseInt(data.emissionsNOx * 10, 10) / 10 + ' g' : _tr('None')
   data.emissionsPM10 = data.emissionsPM10 ? parseInt(data.emissionsPM10 * 100, 10) / 100 + ' g' : _tr('None')
   data.walkDistance = data.walkDistance ? data.walkDistance + ' m' : _tr('None')
-  data.weightLost = data.weightLost ? Math.round(data.weightLost * 100) / 100 + ' g' : _tr('None')
+  data.weightLost = data.weightLost ? Math.round(data.weightLost) + ' g' : _tr('None')
   
   if (data.productiveTime) {
     if (data.productiveTime > 120) {
@@ -201,12 +201,35 @@ Modal.prototype.filters = function () {
 Modal.prototype.selectRoute = function (e) {
   e.preventDefault()
   if (e.target.tagName !== 'BUTTON') return
+  var elem = document.querySelector('.table-responsive')
+  var elemChanged = elem.childNodes[1].childNodes[3].innerHTML
 
   var index = e.target.getAttribute('data-index')
   var route = this.model[index]
   var plan = session.plan()
   var tags = route.tags(plan)
   var self = this
+
+  // Afficher la feuille de route
+
+  var el = document.querySelectorAll('li.RouteCard')[index]
+  var expanded = document.querySelector('.option.expanded')
+  if (expanded) expanded.classList.remove('expanded')
+
+  el.classList.add('expanded')
+
+  analytics.track('Expanded Route Details', {
+    plan: session.plan().generateQuery(),
+    route: {
+      modes: route.modes(),
+      summary: route.summary()
+    }
+  })
+  elem.childNodes[1].childNodes[3].innerHTML = selectLine(elemChanged, index)
+  
+  var w = window.open('impress')
+  w.routeCard = el
+  w.helpMe = elem
 
   routeResource.findByTags(tags, function (err, resources) {
     if (err) log.error(err)
@@ -222,6 +245,23 @@ Modal.prototype.selectRoute = function (e) {
     })
   })
 }
+
+/**
+ * Delete all options except the select one to print it
+ */
+
+function selectLine(elem, index){
+  var separator = elem.indexOf('data-index="' + index)
+  var startElem = elem.slice(0, separator)
+  var endElem = elem.slice(separator+1)
+  var start = startElem.lastIndexOf("<tr>")
+  var end = startElem.length + endElem.indexOf('</tr>') + 5
+  elem = elem.slice(start, end)
+  var startButton = elem.lastIndexOf("<td>")
+  var endButton = elem.lastIndexOf("</td>") + 5
+  elem = elem.slice(0, startButton-1) + elem.slice(endButton)
+  return elem
+ }
 
 /**
  * Multipliers
@@ -361,21 +401,21 @@ function uncamelize (string) {
  * get CO2 production
  */
  function getEmissions(route){
-   return pollution.getCarCO2Pollution(route) + pollution.getBusCO2Pollution(route) + pollution.getCoachCO2Pollution(route) + pollution.getTrainCO2Pollution(route)
+   return pollution.getCarCO2Pollution(route) + pollution.getBusCO2Pollution(route) + pollution.getCoachCO2Pollution(route) + pollution.getTrainCO2Pollution(route) + pollution.getTramCO2Pollution(route)
  }
 
 /**
  * get NOx production
  */
  function getEmissionsNOx(route){
-   return pollution.getCarNOxPollution(route) + pollution.getBusNOxPollution(route) + pollution.getCoachNOxPollution(route) + pollution.getTrainNOxPollution(route)
+   return pollution.getCarNOxPollution(route) + pollution.getBusNOxPollution(route) + pollution.getCoachNOxPollution(route) + pollution.getTrainNOxPollution(route) + pollution.getTramNOxPollution(route)
  }
 
 /**
  * get PM10 production
  */
  function getEmissionsPM10(route){
-   return pollution.getCarPM10Pollution(route) + pollution.getBusPM10Pollution(route) + pollution.getCoachPM10Pollution(route) + pollution.getTrainPM10Pollution(route)
+   return pollution.getCarPM10Pollution(route) + pollution.getBusPM10Pollution(route) + pollution.getCoachPM10Pollution(route) + pollution.getTrainPM10Pollution(route) + pollution.getTramPM10Pollution(route)
  }
 
 /**

@@ -54,7 +54,7 @@ module.exports = function (el) {
       zoomControl : false,
       inertia: false,
       zoomAnimation: false,
-      minZoom: 12,
+      minZoom: 11,
       maxZoom: 18
     }
     
