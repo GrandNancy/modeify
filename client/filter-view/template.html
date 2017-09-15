@@ -37,21 +37,21 @@
           <select select-value="bikeSpeed" select-options="bikeSpeeds" select-parse-value="parseInt" on-change="saveProfile"></select>
       </div>
       <div>
-          <label class="label-text">max time</label>
+          <label class="label-text">max time on bike</label>
           <input name="maxBikeTime" type="text" placeholder="min" data-value="maxBikeTime" on-change="save"></input>
           <span> min</span>
       </div>
       <div>
         <label>Bike Safe</label>
-        <input type="range" min='0' max='100' name="bikeSafe" data-value="bikeSafe" on-change="save"></input><span class="valueTriangle">{bikeSafe}</span>
+        <input type="range" min='0' max='100' name="bikeSafe" data-value="bikeSafe" on-change="save"></input><span class="valueTriangle">{bikeSafe}%</span>
       </div>
       <div>
         <label>Bike Slope</label>
-        <input type="range" min='0' max='100' name="bikeSlope" data-value="bikeSlope" on-change="save"></input><span class="valueTriangle">{bikeSlope}</span>
+        <input type="range" min='0' max='100' name="bikeSlope" data-value="bikeSlope" on-change="save"></input><span class="valueTriangle">{bikeSlope}%</span>
       </div>
       <div>
         <label>Bike Time</label>
-        <input type="range" min='0' max='100' name="bikeTime" data-value="bikeTime" on-change="save"></input><span class="valueTriangle">{bikeTime}</span>
+        <input type="range" min='0' max='100' name="bikeTime" data-value="bikeTime" on-change="save"></input><span class="valueTriangle">{bikeTime}%</span>
       </div>
     </div>
     <div class="ExpandedSettings-walk">
@@ -61,7 +61,7 @@
         <select select-value="walkSpeed" select-options="walkSpeeds" select-parse-value="parseInt" on-change="saveProfile"></select>
 	  </div>
 	  <div>
-        <label class="label-text">max time</label>
+        <label class="label-text">max time walking</label>
         <input name="maxWalkTime" type="text" placeholder="min" data-value="maxWalkTime" on-change="save"></input>
         <span> min</span>
 	  </div>
@@ -84,10 +84,10 @@
       <div>
         <label>voiture </label>
         <select name="carType" size="1" data-value="carType" on-change="save">
-          <option value="diesel">diesel
-          <option value="essence">essence
-          <option value="electrique">électrique
-          <option value="hybride">hybride
+          <option value="diesel">diesel</option>
+          <option value="essence">essence</option>
+          <option value="electrique">électrique</option>
+          <option value="hybride">hybride</option>
         </select>
       </div>
     </div>

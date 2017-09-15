@@ -7,7 +7,8 @@
             "hybride" : 100,
             "essence" : 120
         },
-        "train" : 43,
+        "train" : 0,
+        "tram" : 0,
         "bus" : 110,
         "coach" : 80 // ou pas
     },
@@ -18,7 +19,8 @@
             "hybride" : 0.01,
             "essence" : 0.02
         },
-        "train" : 43,
+        "train" : 0,
+        "tram" : 0,
         "bus" : 0.25,
         "coach" : 0.25
     },
@@ -29,8 +31,16 @@
             "hybride" : 0.2,
             "essence" : 0.2
         },
-        "train" : 43,
+        "train" : 0,
+        "tram" : 0,
         "bus" : 4.9,
         "coach" : 4.9
+    },
+    "speed" : {
+        "bus": 4.2,
+        "ted": 10,
+        "sub": 5.6,
+        "train": 25,
+        "tram": 4.2
     }
 }

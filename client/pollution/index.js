@@ -1,10 +1,11 @@
 var pollution = require('./pollution.json')
 
 var myCar = "diesel"
-var speedBus = 4.2 // environ 15km/h
-var speedTed = 10 // 36km/h
-var speedSub = 5.6 // environ 20km/h
-var speedTrain = 25 //90km/h
+var speedBus = pollution.speed.bus // environ 15km/h
+var speedTed = pollution.speed.ted // 36km/h
+var speedSub = pollution.speed.sub // environ 20km/h
+var speedTrain = pollution.speed.train //90km/h
+var speedTram = pollution.speed.tram //environ 15km/h
 
 module.exports.setCar = function(value){
     myCar = value
@@ -13,6 +14,10 @@ module.exports.setCar = function(value){
 module.exports.getCarCO2Pollution = function(route){
     var distance = route.driveDistance()
     return pollution.co2.voiture[myCar] * distance / 1000
+}
+
+module.exports.getTramCO2Pollution = function(route){
+    return route.attrs.timeInTram ? pollution.co2.tram * speedTram * route.attrs.timeInTram / 1000 : 0
 }
 
 module.exports.getTrainCO2Pollution = function(route){
@@ -39,6 +44,10 @@ module.exports.getTrainNOxPollution = function(route){
     return route.attrs.timeInTrain ? pollution.nox.train * speedTrain * route.attrs.timeInTrain / 1000 : 0
 }
 
+module.exports.getTramNOxPollution = function(route){
+    return route.attrs.timeInTram ? pollution.nox.tram * speedTram * route.attrs.timeInTram / 1000 : 0
+}
+
 module.exports.getBusNOxPollution = function(route){
     return route.attrs.timeInBus ? pollution.nox.bus * speedBus * route.attrs.timeInBus / 1000 : 0
 }
@@ -57,6 +66,10 @@ module.exports.getCarPM10Pollution = function(route){
 
 module.exports.getTrainPM10Pollution = function(route){
     return route.attrs.timeInTrain ? pollution.pm10.train * speedTrain * route.attrs.timeInTrain / 1000 : 0
+}
+
+module.exports.getTramPM10Pollution = function(route){
+    return route.attrs.timeInTram ? pollution.pm10.tram * speedTram * route.attrs.timeInTram / 1000 : 0
 }
 
 module.exports.getBusPM10Pollution = function(route){

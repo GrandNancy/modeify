@@ -35,7 +35,8 @@
     "to": "à",
     "More Settings ": "Plus de paramètres ",
     "Hide Settings ": "Cacher les paramètres ",
-    "max time": "Durée maximale",
+    "max time on bike": "Durée maximale à vélo",
+    "max time walking": "Durée maximale à pied",
     "Bike Safe": "Privilégier la sécurité en vélo",
     "Bike Slope": "Privilégier le plat en vélo",
     "Bike Time": "Minimiser le temps en vélo",
@@ -145,5 +146,10 @@
     " € de parking": " € de parking",
     " € d'essences et d'entretien de voiture": " € d'essences et d'entretien de voiture",
     " € de transport en commun": " € de transport en commun",
-    " € de location de vélo":  " € de location de vélo"
+    " € de location de vélo":  " € de location de vélo",
+    "diesel": "diesel",
+    "essence": "essence",
+    "électrique": "électrique",
+    "hybride": "hybride",
+    "voiture ": "voiture "
 }

@@ -89,9 +89,6 @@ function updateRoutes (plan, opts, callback) {
         // gestion des bus stan, sub et ted. stan a des bus, sub et ted des cars
         if (journeys.profile[i].modes.indexOf('bus') !== -1){
           journeys.profile[i].costTransit = fares.transit.yearlyRoundTrip
-          journeys.profile[i].timeInBus = 0
-          journeys.profile[i].timeInSub = 0
-          journeys.profile[i].timeInTed = 0
           for (var j = 0; j < journeys.profile[i].transit.length; j++){
             if (journeys.profile[i].transit[j].routes[0].mode == 'BUS') {
               if (journeys.profile[i].transit[j].routes[0].agencyName.toLowerCase() == 'sub') {
@@ -109,9 +106,9 @@ function updateRoutes (plan, opts, callback) {
 
         if (journeys.profile[i].modes.indexOf('tram') !== -1){
           journeys.profile[i].costTransit = fares.transit.yearlyRoundTrip
-          journeys.profile[i].timesInTram = 0
+          journeys.profile[i].timeInTram = 0
           for (var j = 0; j < journeys.profile[i].transit.length; j++){
-            if (journeys.profile[i].transit[j].routes[0].mode == 'tram') journeys.profile[i].timesInTram += journeys.profile[i].transit[j].rideStats.avg
+            if (journeys.profile[i].transit[j].routes[0].mode == 'TRAM') journeys.profile[i].timeInTram += journeys.profile[i].transit[j].rideStats.avg
           }
         }
 

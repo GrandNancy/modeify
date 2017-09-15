@@ -12,7 +12,7 @@
     },
     "transit":{
         "daily": 1.30,
-        "dailyRoundTrip": 1.86,
+        "dailyRoundTrip": 1.90,
         "yearly": 313.5,
         "yearlyRoundTrip": 313.5
     },
